@@ -1,0 +1,16 @@
+@startuml
+
+agent bench as "Benchmark App (Gatling)"
+
+cloud docker as "Docker for Mac" {
+  agent front as "Front container (OpenResty/nginx)"
+  agent envoy as "Envoy container"
+  agent backend as "Busy loop service (OpenResty)"
+}
+
+bench -> front : HTTP
+front --> envoy : "via envoy"
+front ---> backend : "direct"
+envoy ---> backend : "via envoy"
+
+@enduml
