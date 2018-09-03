@@ -39,7 +39,7 @@ static_resources:
     lb_policy: ROUND_ROBIN
     hosts:
     - socket_address:
-        address: backend
+        address: heavy_backend
         port_value: 8081
     circuit_breakers:
       thresholds:
