@@ -1,0 +1,19 @@
+@startuml
+
+agent bench as "Benchmark App (Gatling)"
+
+cloud docker as "Docker for Mac" {
+  agent light as "Light Backend"
+  agent front as "Front Container"
+  agent envoy as "Envoy container"
+  agent backend as "Busy loop backend"
+
+  bench -> front : "busy service"
+  bench -> front : "light service"
+  front --> envoy : "via envoy"
+  front ---> backend : "direct"
+  front -> light : "direct"
+  envoy ---> backend : "via envoy"
+}
+
+@enduml
